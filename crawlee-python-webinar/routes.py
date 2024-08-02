@@ -7,10 +7,6 @@ router = Router[PlaywrightCrawlingContext]()
 @router.default_handler
 async def default_handler(context: PlaywrightCrawlingContext) -> None:
     """Default request handler."""
-    title = await context.page.query_selector('title')
-    await context.push_data(
-        {
-            'url': context.request.loaded_url,
-            'title': await title.inner_text() if title else None,
-        }
-    )
+
+    # Wait for the popup to be visible to ensure it has loaded on the page.
+    await context.page.get_by_test_id('dialog-accept-button').click()
