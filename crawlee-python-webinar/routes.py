@@ -14,5 +14,3 @@ async def default_handler(context: PlaywrightCrawlingContext) -> None:
             'title': await title.inner_text() if title else None,
         }
     )
-
-    await context.enqueue_links()

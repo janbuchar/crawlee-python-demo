@@ -8,13 +8,14 @@ from .routes import router
 async def main() -> None:
     """The crawler entry point."""
     crawler = PlaywrightCrawler(
+        headless=False,
         request_handler=router,
-        max_requests_per_crawl=50,
+        max_requests_per_crawl=100,
     )
 
     await crawler.run(
         [
-            'https://crawlee.dev',
+            'https://nike.com/cz/en',
         ]
     )
 
