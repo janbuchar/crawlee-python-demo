@@ -1,0 +1,7 @@
+.venv/
+mise.toml
+storage/
+__pycache__/
+.ruff_cache/
+shoes.csv
+.vscode/settings.json
