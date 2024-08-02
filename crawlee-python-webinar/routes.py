@@ -29,3 +29,31 @@ async def default_handler(context: PlaywrightCrawlingContext) -> None:
 @router.handler('listing')
 async def listing_handler(context: PlaywrightCrawlingContext) -> None:
     """Handler for shoe listings."""
+
+    await context.enqueue_links(selector='a.product-card__link-overlay', label='detail')
+
+
+@router.handler('detail')
+async def detail_handler(context: PlaywrightCrawlingContext) -> None:
+    """Handler for shoe details."""
+
+    title = await context.page.get_by_test_id(
+        'product_title',
+    ).text_content()
+
+    price = await context.page.get_by_test_id(
+        'currentPrice-container',
+    ).first.text_content()
+
+    description = await context.page.get_by_test_id(
+        'product-description',
+    ).text_content()
+
+    await context.push_data(
+        {
+            'url': context.request.loaded_url,
+            'title': title,
+            'price': price,
+            'description': description,
+        }
+    )
