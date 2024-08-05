@@ -44,6 +44,8 @@ async def listing_handler(context: PlaywrightCrawlingContext) -> None:
     """Handler for shoe listings."""
 
     async with accept_cookies(context.page):
+        await context.page.wait_for_load_state('networkidle')
+        await context.infinite_scroll()
         await context.enqueue_links(
             selector='a.product-card__link-overlay', label='detail'
         )
