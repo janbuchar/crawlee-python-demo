@@ -18,7 +18,7 @@ async def main() -> None:
             'https://nike.com/cz/en',
         ]
     )
-    
+
     await crawler.export_data('shoes.csv')
 
 
