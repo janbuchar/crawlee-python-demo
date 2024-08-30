@@ -1,8 +1,8 @@
 import asyncio
 from contextlib import suppress, asynccontextmanager
 
-from crawlee.basic_crawler import Router
-from crawlee.models import Request
+from crawlee.router import Router
+from crawlee import Request
 from crawlee.playwright_crawler import PlaywrightCrawlingContext
 from playwright.async_api import Page, TimeoutError as PlaywrightTimeoutError
 
@@ -44,8 +44,8 @@ async def listing_handler(context: PlaywrightCrawlingContext) -> None:
     """Handler for shoe listings."""
 
     async with accept_cookies(context.page):
-        await context.page.wait_for_load_state('networkidle')
-        await context.infinite_scroll()
+        # await context.page.wait_for_load_state('networkidle')
+        # await context.infinite_scroll()
         await context.enqueue_links(
             selector='a.product-card__link-overlay', label='detail'
         )

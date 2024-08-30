@@ -1,6 +1,6 @@
 import asyncio
 
-from crawlee.playwright_crawler.playwright_crawler import PlaywrightCrawler
+from crawlee.playwright_crawler import PlaywrightCrawler
 
 from .routes import router
 
@@ -8,9 +8,9 @@ from .routes import router
 async def main() -> None:
     """The crawler entry point."""
     crawler = PlaywrightCrawler(
-        headless=False,
+        headless=True,
         request_handler=router,
-        max_requests_per_crawl=100,
+        max_requests_per_crawl=10,
     )
 
     await crawler.run(
